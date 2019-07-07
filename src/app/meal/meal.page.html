@@ -1,0 +1,44 @@
+<ng-container *ngIf="meal$ | async as meal">
+    <ion-header>
+        <ion-toolbar>
+            <ion-back-button defaultHref="home"></ion-back-button>
+            <ion-title>{{ meal.strMeal }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <iframe
+            id="ytplayer"
+            type="text/html"
+            width="100%"
+            height="360"
+            [src]="getYoutubeLink(meal)"
+            frameborder="0"
+        ></iframe>
+        <ion-item lines="none">
+            <h1>
+                {{ meal.strMeal }}
+                <ion-badge color="secondary">{{ meal.strCategory }}</ion-badge>
+            </h1>
+        </ion-item>
+
+        <ion-list>
+            <ion-list-header>
+                <ion-label>Ingredients</ion-label>
+            </ion-list-header>
+            <ion-item *ngFor="let ingredient of ingredients">
+                <ion-label>{{ ingredient[0] | titlecase }}: </ion-label>
+                <ion-note color="dark">{{ ingredient[1] }}</ion-note>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-list-header>
+                <ion-label>Instructions</ion-label>
+            </ion-list-header>
+            <ion-item *ngFor="let instruction of instructions" lines="none">
+                <ion-label text-wrap>{{ instruction }}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ng-container>

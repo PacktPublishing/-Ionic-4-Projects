@@ -1,14 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <h1>
+            🥞 What To Eat Today?
+        </h1>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+    <ion-grid *ngIf="meals$ | async as meals">
+        <ion-row>
+            <ion-col
+                *ngFor="let meal of meals"
+                size="6"
+                [routerLink]="['/meal', meal.idMeal]"
+                routerDirection="forward"
+            >
+                <img [src]="meal.strMealThumb" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data..."
+        >
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
