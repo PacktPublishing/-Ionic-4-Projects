@@ -1,0 +1,15 @@
+<ion-list>
+    <ion-item
+        *ngFor="let inventory of inventories"
+        (click)="goToInventory.emit(inventory.id)"
+    >
+        <ion-thumbnail slot="start">
+            <ion-img [src]="inventory.imageUrl"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+            <h2>{{ inventory.name }}</h2>
+            <p>Quantity: {{ inventory.quantity }}</p>
+            <p>Price: €{{ inventory.price ? inventory.price.toFixed(2) : '' }}</p>
+        </ion-label>
+    </ion-item>
+</ion-list>

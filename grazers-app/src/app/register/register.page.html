@@ -1,0 +1,46 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Registration</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form (ngSubmit)="register()">
+        <ion-list>
+            <ion-item>
+                <ion-label color="primary">Name</ion-label>
+                <ion-input name="name" [(ngModel)]="user.name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary">Email</ion-label>
+                <ion-input name="email" type="email" [(ngModel)]="user.email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary">Password</ion-label>
+                <ion-input
+                    name="password"
+                    type="password"
+                    [(ngModel)]="user.password"
+                ></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-button
+            class="ion-margin-top"
+            expand="block"
+            (click)="register()"
+            color="primary"
+        >
+            Register
+        </ion-button>
+        <ion-button expand="block" (click)="registerWithGoogle()" color="light">
+            <ion-img
+                class="google-logo"
+                slot="start"
+                src="assets/google-logo.png"
+            ></ion-img>
+            Register with Google
+        </ion-button>
+    </form>
+</ion-content>

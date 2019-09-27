@@ -1,0 +1,117 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>{{ inventory.name ? inventory.name : 'New' }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form>
+        <ion-img
+            *ngIf="imageData; else placeholderImg"
+            class="inv-img"
+            [src]="imageData"
+        ></ion-img>
+        <ng-template #placeholderImg>
+            <div class="inv-placeholder" (click)="launchCamera()">
+                <ion-icon name="camera" class="inv-placeholder--icon"></ion-icon>
+            </div>
+        </ng-template>
+        <input
+            hidden
+            type="file"
+            accept="image/*"
+            #imageUpload
+            (change)="uploadImage(imageUpload)"
+        />
+
+        <ion-list margin-top-16>
+            <ion-item lines="none">
+                <ion-button
+                    *ngIf="userIsAdmin | async"
+                    slot="end"
+                    color="secondary"
+                    size="default"
+                    (click)="delete(inventory.id)"
+                >
+                    <ion-icon name="trash"></ion-icon>
+                    Delete
+                </ion-button>
+                <ion-button
+                    *ngIf="!(userIsAdmin | async)"
+                    slot="end"
+                    color="secondary"
+                    size="default"
+                    (click)="notifyRestock()"
+                >
+                    <ion-icon name="notifications"></ion-icon>
+                    Restock
+                </ion-button>
+            </ion-item>
+
+            <ion-item lines="none">
+                <ion-button
+                    color="primary"
+                    slot="start"
+                    class="quantity-btn"
+                    (click)="removeQty()"
+                >
+                    <ion-icon slot="icon-only" name="remove"></ion-icon>
+                </ion-button>
+                <ion-label position="floating">Quantity</ion-label>
+                <ion-input
+                    [(ngModel)]="inventory.quantity"
+                    type="number"
+                    name="quantity"
+                ></ion-input>
+                <ion-button
+                    color="primary"
+                    slot="end"
+                    class="quantity-btn"
+                    (click)="addQty()"
+                >
+                    <ion-icon slot="icon-only" name="add"></ion-icon>
+                </ion-button>
+            </ion-item>
+            <ion-item margin-top-16>
+                <ion-label position="floating">Barcode</ion-label>
+                <ion-input [(ngModel)]="inventory.code" name="barcode"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input [(ngModel)]="inventory.name" name="name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Price (€)</ion-label>
+                <ion-input
+                    [(ngModel)]="inventory.price"
+                    type="number"
+                    name="price"
+                ></ion-input>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>
+<ion-footer>
+    <ion-row>
+        <ion-col>
+            <ion-button routerLink="/" expand="block" fill="outline">
+                Cancel
+            </ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button
+                [disabled]="state.saving"
+                color="primary"
+                expand="block"
+                (click)="save()"
+            >
+                <ion-spinner *ngIf="state.saving"></ion-spinner>
+                Save
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

@@ -1,0 +1,7 @@
+{
+  "name": "pomodoro-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

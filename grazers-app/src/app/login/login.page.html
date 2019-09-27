@@ -1,0 +1,33 @@
+<ion-content>
+    <div class="bg"></div>
+    <h1 class="title">
+        <ion-img class="logo" src="assets/logo.png"></ion-img>
+        Grazers
+    </h1>
+    <form (ngSubmit)="signIn()">
+        <ion-item>
+            <ion-input
+                name="email"
+                type="email"
+                placeholder="Email"
+                [(ngModel)]="email"
+            ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input
+                name="password"
+                type="password"
+                placeholder="Password"
+                [(ngModel)]="password"
+            ></ion-input>
+        </ion-item>
+    </form>
+    <ion-button class="ion-margin-top" expand="block" (click)="signIn()" color="primary">
+        Sign In
+    </ion-button>
+    <ion-button expand="block" (click)="signInWithGoogle()" color="light">
+        <ion-img class="google-logo" slot="start" src="assets/google-logo.png"></ion-img>
+        Sign In with Google
+    </ion-button>
+    <ion-button expand="block" routerLink="/register" fill="clear">Register</ion-button>
+</ion-content>

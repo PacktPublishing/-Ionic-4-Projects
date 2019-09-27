@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button (click)="openMenu()" autoHide="true"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Notifications</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <app-list-item
+        [inventories]="inventories$ | async"
+        (goToInventory)="goToInventory($event)"
+    ></app-list-item>
+</ion-content>

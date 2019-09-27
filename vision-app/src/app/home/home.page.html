@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button fill="clear" slot="end" (click)="save()">
+            <ion-icon slot="start" name="save"></ion-icon>
+            Save
+        </ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <img *ngIf="currentImage" [src]="currentImage" />
+    <ion-row>
+        <ion-chip *ngFor="let tag of tags">
+            {{ tag.description }}
+        </ion-chip>
+    </ion-row>
+</ion-content>
+<ion-footer>
+    <ion-row class="footer-toolbar">
+        <ion-fab-button (click)="takePicture()" class="take-picture">
+            <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+
+        <ion-avatar *ngIf="lastUpload" class="last-upload" routerLink="/folders">
+            <img [src]="lastUpload.image" />
+        </ion-avatar>
+    </ion-row>
+</ion-footer>

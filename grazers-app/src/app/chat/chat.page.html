@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ targetName }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="bg"></div>
+    <div class="chat-area">
+        <div
+            class="chat-row"
+            *ngFor="let message of messages$ | async"
+            [class.own-row]="message.sender === currentUserEmail"
+            [class.res-row]="message.sender != currentUserEmail"
+        >
+            <div
+                class="chat-bubble"
+                [class.own-bubble]="message.sender === currentUserEmail"
+                [class.res-bubble]="message.sender != currentUserEmail"
+            >
+                <p>{{ message.text }}</p>
+                <small class="chat-time">{{
+                    message.timestamp | date: 'shortTime'
+                }}</small>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-item>
+        <ion-input [(ngModel)]="text" placeholder="Type a message"></ion-input>
+        <ion-button slot="end" color="primary" fill="clear" (click)="sendMessage()">
+            <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+    </ion-item>
+</ion-footer>

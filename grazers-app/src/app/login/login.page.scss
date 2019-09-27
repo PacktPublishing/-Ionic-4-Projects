@@ -1,0 +1,25 @@
+.bg {
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+        url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Vegan_meal%2C_sweet_potato%2C_guacamole%2C_fried_mushrooms%2C_plant_based.jpg/800px-Vegan_meal%2C_sweet_potato%2C_guacamole%2C_fried_mushrooms%2C_plant_based.jpg')
+            no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 0;
+}
+
+.title {
+    display: flex;
+    font-size: 26px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40%;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 10;
+
+    ion-img {
+        width: 50px;
+    }
+}

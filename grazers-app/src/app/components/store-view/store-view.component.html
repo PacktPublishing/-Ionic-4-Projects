@@ -1,0 +1,128 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="dismissModal()"
+                ><ion-icon slot="icon-only" name="close"></ion-icon
+            ></ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content #content *ngIf="store">
+    <ion-slides>
+        <ion-slide *ngFor="let img of getPreviewImage()">
+            <ion-img [src]="img"></ion-img>
+        </ion-slide>
+    </ion-slides>
+    <ion-list>
+        <ion-item>
+            <ion-label>
+                <h1>{{ store.name }}</h1>
+                <p>{{ store.address }}</p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-fab-button
+                *ngIf="store.phone"
+                class="ion-margin"
+                href="tel:{{ store.phone }}"
+            >
+                <ion-icon name="call"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button class="ion-margin" (click)="goToChat()">
+                <ion-icon name="chatboxes"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button *ngIf="store.url" class="ion-margin" href="{{ store.url }}">
+                <ion-icon name="globe"></ion-icon>
+            </ion-fab-button>
+        </ion-item>
+        <ion-list-header>
+            Reviews
+        </ion-list-header>
+        <ion-item lines="none" *ngIf="!state.addingReview">
+            <ion-row class="add-photos-btn">
+                <ion-button
+                    (click)="state.addingReview = true; scrollTo(reviewStars)"
+                    size="small"
+                    shape="round"
+                    fill="outline"
+                >
+                    <ion-icon name="camera" slot="start"></ion-icon>
+                    Add Review
+                </ion-button>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+
+    <!-- ADD REVIEW SECTION -->
+    <ion-grid *ngIf="state.addingReview" lines="none">
+        <ion-row class="ion-justify-content-center" #reviewStars>
+            <ion-button
+                *ngFor="let star of fiveStar; let $star = index"
+                (click)="currentReview.stars = $star + 1"
+                fill="clear"
+                color="warning"
+            >
+                <ion-icon
+                    slot="icon-only"
+                    [attr.name]="
+                        currentReview.stars >= $star + 1 ? 'star' : 'star-outline'
+                    "
+                >
+                </ion-icon>
+            </ion-button>
+        </ion-row>
+        <ion-row class="add-photos-btn" class="ion-justify-content-center">
+            <ion-button
+                *ngIf="!currentReview.image"
+                (click)="launchImageUpload()"
+                size="small"
+                shape="round"
+                fill="outline"
+            >
+                <ion-icon name="camera" slot="start"></ion-icon>
+                Add Photos
+            </ion-button>
+            <input
+                hidden
+                type="file"
+                accept="image/*"
+                #imageUpload
+                (change)="uploadImage(imageUpload)"
+            />
+        </ion-row>
+        <ion-row *ngIf="currentReview.image">
+            <ion-img [src]="currentReview.image"></ion-img>
+        </ion-row>
+        <ion-row>
+            <ion-textarea
+                [(ngModel)]="currentReview.text"
+                placeholder="Share your experience"
+            ></ion-textarea>
+        </ion-row>
+        <ion-button (click)="postReview()" expand="block" fill="outline" color="primary">
+            Post
+        </ion-button>
+    </ion-grid>
+
+    <!-- POSTED REVIEW SECTION -->
+    <ion-grid>
+        <ion-row *ngFor="let review of storeReviews | async">
+            <ion-col>
+                <ion-img class="ion-margin-bottom" [src]="review.image"></ion-img>
+                <ion-label>
+                    <h5>{{ review.userName }}</h5>
+                    <p>{{ review.timestamp | date: 'mediumDate' }}</p>
+                </ion-label>
+                <ion-row class="ion-margin-bottom">
+                    <ion-icon
+                        *ngFor="let star of fiveStar; let $star = index"
+                        color="warning"
+                        [attr.name]="review.stars >= $star + 1 ? 'star' : 'star-outline'"
+                    >
+                    </ion-icon>
+                </ion-row>
+                <ion-text>{{ review.text }}</ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

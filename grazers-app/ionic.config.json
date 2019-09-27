@@ -1,0 +1,7 @@
+{
+  "name": "grazers-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

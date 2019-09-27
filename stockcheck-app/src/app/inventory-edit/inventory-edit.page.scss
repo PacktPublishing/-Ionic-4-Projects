@@ -1,0 +1,24 @@
+.quantity-btn {
+    align-self: center;
+    height: 60px;
+    width: 60px;
+}
+
+.inv-img,
+.inv-placeholder {
+    height: 250px;
+    padding-top: 10px;
+}
+
+.inv-placeholder {
+    background-color: grey;
+    position: relative;
+}
+.inv-placeholder--icon {
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+    font-size: 50px;
+    top: 95px;
+    color: white;
+}

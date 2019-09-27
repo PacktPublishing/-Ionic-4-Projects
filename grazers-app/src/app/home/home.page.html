@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <h1 class="title">
+            <ion-img class="logo" src="assets/logo.png"></ion-img>
+            Grazers
+        </h1>
+        <ion-buttons slot="end">
+            <ion-button routerLink="/chat-list" fill="clear" color="primary">
+                <ion-icon slot="icon-only" name="chatboxes"> </ion-icon>
+                <div *ngIf="notification$ | async" class="dot"></div>
+            </ion-button>
+            <ion-button (click)="userPopover($event)" fill="clear" color="primary">
+                <ion-icon slot="icon-only" name="person"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <input placeholder="Search" id="pac-input" />
+        <ion-icon name="search" slot="end"></ion-icon>
+    </ion-item>
+    <div #gmap id="gmap"></div>
+</ion-content>

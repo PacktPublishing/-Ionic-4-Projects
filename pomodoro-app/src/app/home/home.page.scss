@@ -1,0 +1,29 @@
+#progress-circle {
+    margin-top: 50px;
+    transform: rotate(-90deg);
+}
+
+.timer-text {
+    transform: rotate(90deg);
+    transform-origin: center;
+    font-size: 36px;
+    text-anchor: middle;
+    font-weight: 600;
+    fill: #333;
+}
+
+.footer ion-button {
+    font-size: 30px;
+    font-weight: 600;
+    height: 100px;
+    button {
+        height: 100px;
+    }
+}
+
+.timer-icons {
+    margin-top: -20vh;
+    height: 5vh;
+    width: 100vw;
+    fill: var(--ion-color-secondary);
+}
